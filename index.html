@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSec Portfolio - Ritesh Kisku</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a; /* Very dark background */
+            color: #e0e0e0; /* Light grey text */
+        }
+        h1, h2, h3, h4, h5, h6, .font-fira {
+            font-family: 'Fira Code', monospace; /* Monospace font for headings and specific elements */
+        }
+        .accent-color {
+            color: #00ffcc; /* Bright cyan/teal accent */
+        }
+        .bg-accent {
+            background-color: #00ffcc;
+        }
+        .border-accent {
+            border-color: #00ffcc;
+        }
+        .hover-accent:hover {
+            color: #00ffcc;
+            border-color: #00ffcc;
+        }
+        .section {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+            border-bottom: 1px solid #333; /* Subtle separator */
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        /* Simple fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Typing effect container */
+        .typing-container {
+            display: inline-block;
+            vertical-align: bottom;
+        }
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1.2em;
+            background-color: #00ffcc;
+            margin-left: 4px;
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { background-color: transparent }
+            50% { background-color: #00ffcc; }
+        }
+
+        /* Glitch effect on hover - subtle */
+        .glitch-hover {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-hover:hover::before,
+        .glitch-hover:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+        }
+        .glitch-hover:hover::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            animation: glitch-anim-1 1s infinite linear alternate-reverse;
+        }
+        .glitch-hover:hover::after {
+            left: -2px;
+            text-shadow: -1px 0 blue;
+            animation: glitch-anim-2 1s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            10% { clip: rect(17px, 9999px, 96px, 0); }
+            /* ... add more steps for variation */
+            100% { clip: rect(92px, 9999px, 98px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 119px, 0); }
+             /* ... add more steps for variation */
+            100% { clip: rect(18px, 9999px, 86px, 0); }
+        }
+
+        /* Card styling */
+        .card {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 204, 0.1);
+            border-color: #00ffcc;
+        }
+
+        /* Button styling */
+        .btn {
+            @apply inline-block px-6 py-3 rounded-md transition duration-300 ease-in-out font-fira font-semibold;
+        }
+        .btn-primary {
+            @apply bg-accent text-black hover:bg-opacity-80;
+        }
+        .btn-secondary {
+            @apply border border-accent text-accent hover:bg-accent hover:text-black;
+        }
+        .btn-icon {
+             @apply inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-600 text-gray-400 hover:text-accent hover:border-accent transition duration-300;
+        }
+
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <header class="fixed top-0 left-0 right-0 z-50 bg-opacity-90 backdrop-blur-md bg-gray-900 border-b border-gray-700">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold font-fira hover-accent glitch-hover" data-text="Ritesh Kisku">
+                Ritesh Kisku
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="hover-accent">About</a>
+                <a href="#projects" class="hover-accent">Projects</a>
+                <a href="#certs" class="hover-accent">Certifications</a>
+                <a href="#tools" class="hover-accent">Tools</a>
+                <a href="#contact" class="hover-accent">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <i class="fas fa-bars text-xl hover-accent"></i>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800">
+            <a href="#about" class="block px-6 py-3 hover:bg-gray-700 hover-accent">About</a>
+            <a href="#projects" class="block px-6 py-3 hover:bg-gray-700 hover-accent">Projects</a>
+            <a href="#certs" class="block px-6 py-3 hover:bg-gray-700 hover-accent">Certifications</a>
+            <a href="#tools" class="block px-6 py-3 hover:bg-gray-700 hover-accent">Tools</a>
+            <a href="#contact" class="block px-6 py-3 hover:bg-gray-700 hover-accent">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-screen flex items-center justify-center text-center bg-gradient-to-b from-gray-900 via-gray-900 to-black relative overflow-hidden px-4">
+             <div class="z-10 relative">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">
+                    <span class="glitch-hover" data-text="Ritesh Kisku">Ritesh Kisku</span>
+                </h1>
+                <p class="text-xl md:text-3xl accent-color mb-8 fade-in" style="animation-delay: 0.2s;">
+                    <span class="typing-container"></span><span class="typing-cursor"></span>
+                </p>
+                <div class="fade-in" style="animation-delay: 0.4s;">
+                    <a href="#about" class="btn btn-primary mr-4">Explore More</a>
+                    <a href="C:\Users\ASUS\Documents\Ritesh CV.pdf" download="Ritesh Kisku_Resume.pdf" class="btn btn-secondary">
+                        <i class="fas fa-download mr-2"></i>Resume
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 fade-in accent-color">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12 fade-in">
+                <div class="md:w-1/3 text-center">
+                    <div class="w-48 h-48 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden border-4 border-accent mb-4">
+                        <img src="C:\Users\ASUS\Documents\Pic.jpg" alt="Ritesh Kisku" class="object-cover w-full h-full">
+                        </div>
+                     <p class="text-lg font-semibold">Ritesh Kisku</p>
+                     <p class="text-gray-400">Cybersecurity Student & 3D Designer</p>
+                </div>
+                <div class="md:w-2/3 text-lg text-gray-300 space-y-4">
+                    <p>
+                        Hello! I'm a passionate and driven cybersecurity student currently pursuing [Bachelors of Degree in Computer Science and Technology] at [Lovely Professional University]. My fascination with the digital world's intricacies and vulnerabilities fuels my desire to build secure systems and defend against emerging threats.
+                    </p>
+                    <p>
+                        I thrive on challenges and am constantly exploring areas like network security, ethical hacking, cryptography, and digital forensics. I enjoy creating 3d models, assets and virtual environments to check my creativity.
+                    </p>
+                    <p>
+                        Beyond the terminal, I enjoy [testing my skills at websites like tryhackme and hackthebox]. I'm eager to apply my skills and contribute to making the digital landscape safer.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 fade-in accent-color">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card p-6 rounded-lg fade-in">
+                    <h3 class="text-xl font-bold mb-3 font-fira accent-color">3D Modeling and Animation Project</h3>
+                    <p class="text-gray-400 mb-4">Successfully designed, modeled, and animated a range of 3D assets, characters, and environments. 
+                        Ensuring high-quality visual representation and smooth integration into a real-time engine.
+                        Created detailed 3D models using Blender, focusing on realism, style, and technical constraints. 
+                        Applied detailed textures and shaders to models, optimizing for performance while maintaining visual fidelity.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-700 text-xs font-semibold px-2 py-1 rounded">Blender</span>
+                    </div>
+                    <a href="#" class="text-accent hover:underline font-semibold">View Details <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                    </div>
+
+                <div class="card p-6 rounded-lg fade-in" style="animation-delay: 0.1s;">
+                    <h3 class="text-xl font-bold mb-3 font-fira accent-color">Game Development Project(ongoing)</h3>
+                    <p class="text-gray-400 mb-4">Currently developing an interactive 3D game using Unity, focusing on both gameplay mechanics and visual design.
+                        Designing engaging game mechanics, level layouts, and player interactions based on an original concept.
+                        Implementing core game functionalities using C# in Unity, including player movement, enemy AI, collision handling, UI systems, and event triggers. 
+                        Integrating self-created or sourced 3D models, animations, and textures into the game environment, ensuring smooth asset pipelines.
+                        Continuously iterating on feedback and addressing technical challenges to refine gameplay, visuals, and overall user engagement.</p>
+                     <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-gray-700 text-xs font-semibold px-2 py-1 rounded">Unity Engine</span>
+                        <span class="bg-gray-700 text-xs font-semibold px-2 py-1 rounded">Unity Assets</span>
+                    </div>
+                    <a href="#" class="text-accent hover:underline font-semibold">View Details <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="certs" class="section container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 fade-in accent-color">Certifications</h2>
+            <div class="max-w-3xl mx-auto">
+                <ul class="space-y-6">
+                    <li class="flex items-start fade-in">
+                        <i class="fas fa-shield-alt text-accent text-xl mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold font-fira">Core and Advanced Java </h3>
+                            <p class="text-gray-400 text-sm">Board Infinity | 17-7-2024 </p>
+                            <p class="text-gray-300 mt-1">Briefly learned basics and advanced java.</p>
+                            </div>
+                    </li>
+                     <li class="flex items-start fade-in" style="animation-delay: 0.1s;">
+                        <i class="fas fa-certificate text-accent text-xl mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold font-fira">Foundation Of Cybersecurity </h3>
+                            <p class="text-gray-400 text-sm">Google | 29-3-2025 </p>
+                            <p class="text-gray-300 mt-1">Briefly learned about Cyber Threats and how to defend against Cyber Threats.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start fade-in" style="animation-delay: 0.2s;">
+                        <i class="fas fa-laptop-code text-accent text-xl mt-1 mr-4"></i>
+                        <div>
+                            <h3 class="text-lg font-semibold font-fira">Privacy and Security in Online Social Media</h3>
+                            <p class="text-gray-400 text-sm">NPTEL | [In Progress]</p>
+                            <p class="text-gray-300 mt-1">Learned about importance of privacy in social media and how to secure our online data in social media platform.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tools" class="section container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 fade-in accent-color">Tools & Technologies</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 text-center">
+                <div class="fade-in">
+                    <i class="fas fa-terminal text-4xl mb-2 text-gray-400 group-hover:text-accent transition duration-300"></i>
+                    <p class="font-semibold">Linux/Bash</p>
+                </div>
+                 <div class="fade-in" style="animation-delay: 0.05s;">
+                    <i class="fab fa-python text-4xl mb-2 text-gray-400 group-hover:text-accent transition duration-300"></i>
+                    <p class="font-semibold">Python</p>
+                </div>
+                 <div class="fade-in" style="animation-delay: 0.1s;">
+                    <i class="fas fa-network-wired text-4xl mb-2 text-gray-400 group-hover:text-accent transition duration-300"></i>
+                    <p class="font-semibold">Wireshark</p>
+                </div>
+                 <div class="fade-in" style="animation-delay: 0.15s;">
+                    <i class="fab fa-java text-4xl mb-2 text-gray-400 group-hover:text-accent transition duration-300"></i>
+                    <p class="font-semibold">Java</p>
+                </div>
+                 <div class="fade-in" style="animation-delay: 0.2s;">
+                    <i class="fas fa-shield-virus text-4xl mb-2 text-gray-400 group-hover:text-accent transition duration-300"></i>
+                    <p class="font-semibold">Nmap</p>
+                </div>
+                 <div class="fade-in" style="animation-delay: 0.35s;">
+                    <i class="fas fa-code-branch text-4xl mb-2 text-gray-400 group-hover:text-accent transition duration-300"></i>
+                    <p class="font-semibold">Git/GitHub</p>
+                </div>
+                 <div class="fade-in" style="animation-delay: 0.45s;">
+                    <i class="fab fa-cuttlefish text-4xl mb-2 text-gray-400 group-hover:text-accent transition duration-300"></i>
+                    <p class="font-semibold">C++</p>
+                </div>
+                </div>
+        </section>
+
+        <section id="contact" class="section container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 fade-in accent-color">Get In Touch</h2>
+            <p class="max-w-2xl mx-auto text-lg text-gray-300 mb-10 fade-in" style="animation-delay: 0.1s;">
+                I'm always open to discussing new opportunities, interesting projects, or anything related to cybersecurity. Feel free to reach out!
+            </p>
+            <div class="flex justify-center space-x-6 fade-in" style="animation-delay: 0.2s;">
+                 <a href="mailto:your.email@example.com" class="btn-icon" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ritesh-kisku/" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://github.com/DevilK78" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                 <a href="https://tryhackme.com/p/ritesh8888kisku" target="_blank" rel="noopener noreferrer" class="btn-icon" aria-label="TryHackMe">
+                     <i class="fas fa-hiking"></i> </a>
+                </div>
+             <div class="mt-12 fade-in" style="animation-delay: 0.3s;">
+                 <a href="C:\Users\ASUS\Documents\Ritesh CV.pdf" download="Ritesh Kisku Resume.pdf" class="btn btn-primary">
+                    <i class="fas fa-download mr-2"></i> Download Resume Again
+                 </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 py-6 text-center text-gray-400">
+        <p>&copy; <span id="current-year"></span> Ritesh Kisku. All rights reserved.</p>
+        <p class="text-sm mt-1">Built with <i class="fas fa-heart text-red-500"></i> and <span class="font-fira text-accent">0xDEADBEEF</span></p>
+    </footer>
+
+    <script>
+        // Simple Mobile Menu Toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Simple Fade-in Animation on Scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2, // Trigger when 20% of the element is visible
+            rootMargin: "0px 0px -50px 0px" // Start animation slightly before it's fully in view
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Stop observing once animated
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // Typing Effect for Hero Section
+        const typingContainer = document.querySelector('.typing-container');
+        const textToType = "Cybersecurity Student & 3D Designer"; // Customize this text
+        let charIndex = 0;
+
+        function typeCharacter() {
+            if (charIndex < textToType.length) {
+                typingContainer.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeCharacter, 100); // Adjust typing speed (milliseconds)
+            }
+        }
+        // Start typing after a short delay
+        setTimeout(typeCharacter, 1000); // Delay before typing starts
+
+        // Optional: Matrix Canvas Background (more complex, requires additional setup)
+        /*
+        const canvas = document.getElementById('matrix-canvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            // ... Add Matrix rain effect code here ...
+            // This can be quite involved, search for "HTML canvas matrix effect" tutorials
+        }
+        */
+
+    </script>
+</body>
+</html>
